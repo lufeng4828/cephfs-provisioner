@@ -1,0 +1,9 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: cephfs
+provisioner: kubernetes.io/cephfs
+parameters:
+  monitors: 10.10.20.17:6789,10.10.20.18:6789,10.10.20.19:6789
+  adminId: admin
+  adminSecretName: cephfs-secret

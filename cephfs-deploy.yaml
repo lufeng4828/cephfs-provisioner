@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: centos-cephfs
+  name: centos-cephfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centos-cephfs
+      tier: tool
+  template:
+    metadata:
+      labels:
+        app: centos-cephfs
+        tier: tool
+      name: centos-cephfs
+    spec:
+      containers:
+      - name: centos-cephfs
+        image: index.tenxcloud.com/andyuan/centos-ssh
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: cephfs
+          mountPath: "/mnt"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: cephfs
+        persistentVolumeClaim:
+          claimName: cephfs

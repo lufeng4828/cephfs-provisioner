@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cephfs-provisioner
+  name: cephfs-provisioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cephfs-provisioner
+      tier: tool
+  template:
+    metadata:
+      labels:
+        app: cephfs-provisioner
+        tier: tool
+      name: cephfs-provisioner
+    spec:
+      containers:
+      - name: cephfs-provisioner
+        image: youdomain.com/public/cephfs-provisioner:v1
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: cephfs
+          mountPath: "/mnt"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: cephfs
+        cephfs:
+          monitors:
+          - 10.10.20.17:6789
+          - 10.10.20.18:6789
+          - 10.10.20.19:6789
+          user: admin
+          secretRef:
+            name: cephfs-secret
+          readOnly: false
