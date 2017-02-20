@@ -9,6 +9,7 @@ import (
 	"time"
 	"path/filepath"
 	"github.com/golang/glog"
+	"github.com/ceph/go-ceph/cephfs"
 	"github.com/kubernetes-incubator/nfs-provisioner/controller"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/pkg/api/v1"
