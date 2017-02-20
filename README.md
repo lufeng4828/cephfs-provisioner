@@ -2,8 +2,6 @@
 
 Using Ceph volume client
 
-# Test instruction
-
 * Build cephfs-provisioner and container image
 
 ```bash
