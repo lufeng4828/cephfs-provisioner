@@ -36,4 +36,5 @@ spec:
           user: admin
           secretRef:
             name: cephfs-secret
+            #namespace: default
           readOnly: false
